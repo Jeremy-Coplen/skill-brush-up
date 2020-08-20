@@ -1,0 +1,20 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.site_footer {
+    @include flex(row, left);
+    border-top: 1px solid $black;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    padding: 10px;
+    div {
+        margin-right: 30px;
+    }
+}
+
+.contact_info_container {
+    p:nth-child(1) {
+        margin-bottom: 10px;
+    }
+}

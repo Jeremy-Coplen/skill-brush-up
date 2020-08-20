@@ -1,0 +1,26 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+
+.about {
+    height: 100vw;
+}
+
+.about_navbar {
+    @include flex(row, space-around);
+    border-bottom: 1px solid $black;
+    padding: 10px;
+}
+
+.about_main_container {
+    @include flex(column);
+    height: 50vw;
+}
+
+.about_description_container {
+    @include flex(column);
+    @include border();
+    height: 40vw;
+    width: 40vw;
+    overflow: auto;
+}

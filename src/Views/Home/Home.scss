@@ -2,5 +2,12 @@
 @import "../../Styles/variables.scss";
 
 .home {
-    @include flex();
+    @include flex(column);
+}
+
+.sort_navbar {
+    @include flex(row, space-around);
+    width: 100vw;
+    border-bottom: 1px solid $black;
+    padding: 10px;
 }

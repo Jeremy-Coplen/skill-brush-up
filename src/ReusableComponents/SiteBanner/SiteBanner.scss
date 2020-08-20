@@ -1,0 +1,15 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.site_banner {
+    @include flex();
+    @include border();
+    background-color: $darkBlue;
+    height: 5vw;
+    width: 100vw;
+    margin-bottom: 10px;
+    h1 {
+        color: $white;
+        margin: 0;
+    }
+}
