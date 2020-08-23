@@ -2,7 +2,31 @@
 @import "../../Styles/variables.scss";
 
 .admin_login_nav {
-    @include flex(row, left);
+    @include flex(row, flex-end);
     padding: 10px;
     border-bottom: 1px solid $black;
+}
+
+.login_field_container {
+    @include flex(column);
+    height: 50vw;
+}
+
+.input_container {
+    @include flex(column);
+    @include border();
+    @include shadow();
+    height: 10vw;
+    padding: 20px;
+    :nth-child(1) {
+        margin-bottom: 10px;
+    }
+}
+
+.input_field_container {
+    @include flex(row);
+    p {
+        margin-right: 5px;
+    }
+    margin-bottom: 10px;
 }
