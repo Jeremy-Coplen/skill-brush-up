@@ -27,24 +27,28 @@ app.use(session({
     saveUninitialized: true
 }))
 
-// app.use((req, res, next) => {
-//     if (ENVIRONMENT === "DEV") {
-//         let devAdmin = {
-//             type: "developer",
-//             auth: true
-//         }
-//         req.session.admin = devAdmin
-//         next()
-//     }
-//     else {
-//         next()
-//     }
-// })
+app.use((req, res, next) => {
+    if (ENVIRONMENT === "DEV") {
+        let devAdmin = {
+            id: 0,
+            username: "DEV"
+        }
+        req.session.admin = devAdmin
+        next()
+    }
+    else {
+        next()
+    }
+})
 
 // Admin Endpoints
 
 // Post Endpoints
 app.post("/api/a/login", admin.login)
+
+// Get Endpoints
+app.get("/api/a/check-admin-cred", admin.checkAdminCred)
+app.get("/api/a/logout", admin.logout)
 
 // User Endpoints
 

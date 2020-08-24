@@ -1,7 +1,7 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
 
-.admin_login_nav {
+.one_item_nav {
     @include flex(row, flex-end);
     padding: 10px;
     border-bottom: 1px solid $black;

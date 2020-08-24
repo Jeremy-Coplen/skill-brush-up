@@ -1,0 +1,11 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.logout_btn {
+    color: $black;
+    text-decoration: none;
+
+    &:hover {
+        color: $goldHover;
+    }
+}

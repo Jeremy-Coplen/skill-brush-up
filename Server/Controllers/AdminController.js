@@ -12,8 +12,6 @@ module.exports = {
             let adminUsername = loginRes[0].un
             let adminPassword = loginRes[0].pw
 
-            console.log(username, password)
-
             bcrypt.compare(username, adminUsername, (err, response) => {
                 if(err) {
                     console.log(err)
@@ -34,6 +32,8 @@ module.exports = {
                                     res.sendStatus(401)
                                 }
                                 else {
+                                    let admin = {id: loginRes[0].id, username: username}
+                                    req.session.admin = admin
                                     res.sendStatus(200)
                                 }
                             }
@@ -44,6 +44,32 @@ module.exports = {
         }
         catch(err) {
             console.log(err)
+        }
+    },
+
+    logout: (req, res) => {
+        try {
+            req.session.destroy()
+            res.redirect("/#/a/login")
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    checkAdminCred: (req, res) => {
+        try {
+            if(req.session.admin) {
+                res.status(200).send(req.session.admin)
+            }
+            else {
+                res.status(403).send("Unauthorized")
+            }
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
         }
     }
 }

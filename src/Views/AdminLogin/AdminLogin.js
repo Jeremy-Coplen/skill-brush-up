@@ -44,7 +44,7 @@ class AdminLogin extends Component {
         return (
             <div className="admin_login">
                 <SiteBanner />
-                <div className="admin_login_nav">
+                <div className="one_item_nav">
                     <Link to="/"><button>Home</button></Link>
                 </div>
                 <div className="login_field_container">
