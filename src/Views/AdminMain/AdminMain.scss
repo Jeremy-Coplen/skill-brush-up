@@ -9,3 +9,24 @@
         color: $goldHover;
     }
 }
+
+.admin_main_nav_container {
+    @include flex(column);
+    height: 60vw;
+}
+
+.admin_main_btn_container {
+    @include flex();
+    @include border();
+    @include shadow();
+    flex-wrap: wrap;
+    height: 30vw;
+    width: 30vw;
+    padding: 20px;
+    :nth-child(odd) {
+        margin-right: 20px;
+    }
+    button {
+        font-size: 20px;
+    }
+}

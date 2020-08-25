@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom"
 
 import { getAdminData } from "../../Ducks/reducer"
 import SiteBanner from "../../ReusableComponents/SiteBanner/SiteBanner"
+import AddProductModal from "../../Modals/AddProductModal/AddProductModal"
 import "./AdminMain.scss"
 
 class AdminMain extends Component {
@@ -12,7 +13,12 @@ class AdminMain extends Component {
         super()
 
         this.state = {
-            items: []
+            addProductShow: false,
+            addCatagoryShow: false,
+            editProductsShow: false,
+            editCatagoriesShow: false,
+            deleteProductsShow: false,
+            deleteCatagoriesShow: false
         }
     }
 
@@ -35,6 +41,16 @@ class AdminMain extends Component {
                 <SiteBanner />
                 <div className="one_item_nav">
                     <a className="logout_btn" href={`${process.env.REACT_APP_LOGOUT}`}>logout</a>
+                </div>
+                <div className="admin_main_nav_container">
+                    <div className="admin_main_btn_container">
+                        <button>Add a Product</button>
+                        <button>Add a Catagory</button>
+                        <button>Edit Products</button>
+                        <button>Edit Catagories</button>
+                        <button>Delete Products</button>
+                        <button>Delete Catagories</button>
+                    </div>
                 </div>
             </div>
         )
