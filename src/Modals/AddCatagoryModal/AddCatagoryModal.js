@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 
-import "./AddProductModal.scss"
+import "./AddCatagoryModal.scss"
 
-class AddProductModal extends Component {
+class AddCatagoryModal extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            product: {}
+            catagory: {}
         }
     }
 
@@ -18,9 +18,9 @@ class AddProductModal extends Component {
                 <button className="toggle_show_btn" 
                 onClick={this.props.toggleShow}>X</button>
                 <div></div>
-                <div className="modal_content add_product_content">
+                <div className="modal_content">
                     <div>
-                        <p>Add Product Modal</p>
+                        <p>Add Catagory Modal</p>
                     </div>
                 </div>
                 <div></div>
@@ -29,4 +29,4 @@ class AddProductModal extends Component {
     }
 }
 
-export default AddProductModal
+export default AddCatagoryModal
