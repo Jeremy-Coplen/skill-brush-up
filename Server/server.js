@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 // Admin Post Endpoints
 app.post("/api/a/login", admin.login)
-app.post("/api/a/add/product")
+app.post("/api/a/add/product", admin.addProduct)
 app.post("/api/a/add/catagory", admin.addCatagory)
 
 // Admin Get Endpoints

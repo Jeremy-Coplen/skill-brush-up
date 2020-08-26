@@ -88,7 +88,24 @@ module.exports = {
     },
 
     addProduct: async (req, res) => {
+        try{
+            const db = req.app.get("db")
+            const {
+                catagoryType,
+                name,
+                description,
+                color,
+                pic,
+                price
+            } = req.body
 
+            let productRes = db.add_product([catagoryType, name, description, color, pic, price])
+            res.status(200).send(productRes)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
     },
 
     addCatagory: async (req, res) => {

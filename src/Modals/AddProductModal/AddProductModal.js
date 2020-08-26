@@ -8,12 +8,16 @@ class AddProductModal extends Component {
     constructor(props) {
         super(props)
 
+        this.descRef = React.createRef()
+
         this.state = {
             catagories: [],
             catagoryType: 1,
             name: "",
             description: "",
-            pic: ""
+            color: "",
+            pic: "",
+            price: ""
         }
     }
 
@@ -74,8 +78,50 @@ class AddProductModal extends Component {
         }
     }
 
+    addProduct = async () => {
+        try{
+            if(this.state.catagoryType < 1 ||
+            this.state.name.length < 1 ||
+            this.state.description.length < 1 ||
+            this.state.color.length < 1 ||
+            this.state.pic.length < 1 ||
+            this.state.price.length < 1) {
+                alert("Please fill out all fields")
+                return
+            }
+            else {
+                let number = parseFloat(Number(this.state.price).toFixed(2))
+                let payload = {
+                    catagoryType: this.state.catagoryType,
+                    name: this.state.name,
+                    description: this.state.description,
+                    color: this.state.color,
+                    pic: this.state.pic,
+                    price: number
+                }
+                await axios.post("/api/a/add/product", payload)
+    
+                this.setState({
+                    catagoryType: 1,
+                    name: "",
+                    description: "",
+                    color: "",
+                    pic: "",
+                    price: ""
+                })
+
+                this.descRef.current.value=""
+    
+                this.props.toggleShow()
+                alert("Added product")
+            }
+        }
+        catch(err) {
+            alert("Error adding product please try again later")
+        }
+    }
+
     render() {
-        console.log(this.state)
         let className = this.props.show ? "modal" : "display_none"
         const catagoryTypes = this.state.catagories.map((type, i) => {
             return (
@@ -115,9 +161,19 @@ class AddProductModal extends Component {
                         placeholder="Description"  
                         cols="30" 
                         rows="10"
+                        ref={this.descRef}
                         onChange={this.updateInput} ></textarea>
                     </div>
                     <div className="add_product_input_container">
+                        <p>Color:</p>
+                        <input type="text" 
+                        placeholder="Color"
+                        name="color"
+                        value={this.state.color}
+                        onChange={this.updateInput} />
+                    </div>
+                    <div className="add_product_input_container">
+                        <p>Picture:</p>
                         <Dropzone onDrop={this.onDrop} 
                         style={dropzoneStyle}
                         accept="image/*"
@@ -128,9 +184,14 @@ class AddProductModal extends Component {
                         <img src={this.state.pic} alt="upload pic"/>
                     </div>
                     <div className="add_product_input_container">
-                        
+                        <p>Price:</p>
+                        <input type="number"
+                        placeholder={0}
+                        name="price"
+                        value={this.state.price}
+                        onChange={this.updateInput} />
                     </div>
-                    <button>Add Product</button>
+                    <button onClick={this.addProduct}>Add Product</button>
                 </div>
                 <div></div>
             </div>
