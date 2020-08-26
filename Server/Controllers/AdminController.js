@@ -71,5 +71,38 @@ module.exports = {
             console.log(err)
             res.sendStatus(500)
         }
+    },
+
+    getCatagories: async (req, res) => {
+        try{
+            const db = req.app.get("db")
+
+            let catagoriesRes = await db.get_catagories()
+
+            res.status(200).send(catagoriesRes)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    addProduct: async (req, res) => {
+
+    },
+
+    addCatagory: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const { name } = req.body
+
+            await db.add_catagory([name])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
     }
 }

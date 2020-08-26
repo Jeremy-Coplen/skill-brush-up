@@ -1,2 +1,15 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
+
+.add_catagory_content {
+    @include flex(column);
+    height: 100%;
+    width: 100%;
+}
+
+.add_catagory_input_container {
+    @include flex();
+    :nth-child(1), :nth-child(2) {
+        margin-right: 10px;
+    }
+}

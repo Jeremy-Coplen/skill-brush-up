@@ -59,6 +59,7 @@
 
 .modal_content {
     @include border();
+    @include shadow();
     background: $white;
     height: 50vw;
     width: 60vw;

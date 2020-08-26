@@ -41,16 +41,15 @@ app.use((req, res, next) => {
     }
 })
 
-// Admin Endpoints
-
-// Post Endpoints
+// Admin Post Endpoints
 app.post("/api/a/login", admin.login)
+app.post("/api/a/add/product")
+app.post("/api/a/add/catagory", admin.addCatagory)
 
-// Get Endpoints
+// Admin Get Endpoints
 app.get("/api/a/check-admin-cred", admin.checkAdminCred)
 app.get("/api/a/logout", admin.logout)
-
-// User Endpoints
+app.get("/api/a/get/catagories", admin.getCatagories)
 
 massive(CONNECTION_STRING).then(db => {
     app.set("db", db)

@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import axios from "axios"
 
 import "./AddCatagoryModal.scss"
 
@@ -7,8 +8,30 @@ class AddCatagoryModal extends Component {
         super(props)
 
         this.state = {
-            catagory: {}
+            name: ""
         }
+    }
+
+    updateInput = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    addCatagory = async () => {
+        try {
+            await axios.post("/api/a/add/catagory", {name: this.state.name})
+
+            this.props.toggleShow()
+            this.setState({
+                name: ""
+            })
+            alert("Catagory Added")
+        }
+        catch(err) {
+            alert("Server Error Please Try Again Later")
+        }
+
     }
 
     render() {
@@ -19,8 +42,19 @@ class AddCatagoryModal extends Component {
                 onClick={this.props.toggleShow}>X</button>
                 <div></div>
                 <div className="modal_content">
-                    <div>
-                        <p>Add Catagory Modal</p>
+                    <div className="add_catagory_content">
+                        <div></div>
+                        <div className="add_catagory_input_container">
+                            <p>Name:</p>
+                            <input type="text"
+                            placeholder="Name"
+                            name="name"
+                            value={this.state.name} 
+                            onChange={this.updateInput} />
+                            <button disabled={!this.state.name} 
+                            onClick={this.addCatagory} >Add Catagory</button>
+                        </div>
+                        <div></div>
                     </div>
                 </div>
                 <div></div>

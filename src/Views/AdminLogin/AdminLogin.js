@@ -54,6 +54,7 @@ class AdminLogin extends Component {
                             <p>Username:</p>
                             <input 
                             type="text"
+                            placeholder="Username"
                             name="username"
                             value={this.state.username}
                             onChange={this.updateInput}/>
@@ -62,6 +63,7 @@ class AdminLogin extends Component {
                             <p>Password:</p>
                             <input 
                             type="password"
+                            placeholder="Password"
                             name="password"
                             value={this.state.password}
                             onChange={this.updateInput}/>
