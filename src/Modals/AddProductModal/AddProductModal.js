@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import Dropzone from "react-dropzone"
+import { withRouter } from "react-router-dom"
 
 import "./AddProductModal.scss"
 
@@ -17,7 +18,9 @@ class AddProductModal extends Component {
             description: "",
             color: "",
             pic: "",
-            price: ""
+            price: "",
+            ProductId: "",
+            show: false
         }
     }
 
@@ -36,45 +39,50 @@ class AddProductModal extends Component {
     }
 
     onDrop = async (acceptedFiles, rejectedFiles) => {
-        const {
-            REACT_APP_CL_UPLOAD_PRESET,
-            REACT_APP_CL_API_KEY,
-            REACT_APP_CL_URL
-        } = process.env
-
-        if(rejectedFiles.length >= 1) {
-            let message = ""
-
-            if(rejectedFiles[0].size > 8000000) {
-                message = "file is too big"
+        try {
+            const {
+                REACT_APP_CL_UPLOAD_PRESET,
+                REACT_APP_CL_API_KEY,
+                REACT_APP_CL_URL
+            } = process.env
+    
+            if(rejectedFiles.length >= 1) {
+                let message = ""
+    
+                if(rejectedFiles[0].size > 8000000) {
+                    message = "file is too big"
+                }
+                else {
+                    message = "Wrong file type only images are accepted"
+                }
+                alert(message)
+                return
+            }
+    
+            if(acceptedFiles.length === 0) {
+                return
+            }
+            else if(acceptedFiles.length > 1) {
+                alert("Please only upload one file")
+                return
             }
             else {
-                message = "Wrong file type only images are accepted"
+                const formData = new FormData()
+                formData.append("file", acceptedFiles[0])
+                formData.append("tags", "skillBrushUp, medium, gist")
+                formData.append("upload_preset", `${REACT_APP_CL_UPLOAD_PRESET}`)
+                formData.append("api_key", `${REACT_APP_CL_API_KEY}`)
+                formData.append("timestamp", (Date.now() / 1000 | 0))
+    
+                let picRes = await axios.post(`${REACT_APP_CL_URL}`, formData)
+    
+                this.setState({
+                    pic: picRes.data.secure_url
+                })
             }
-            alert(message)
-            return
         }
-
-        if(acceptedFiles.length === 0) {
-            return
-        }
-        else if(acceptedFiles.length > 1) {
-            alert("Please only upload one file")
-            return
-        }
-        else {
-            const formData = new FormData()
-            formData.append("file", acceptedFiles[0])
-            formData.append("tags", "skillBrushUp, medium, gist")
-            formData.append("upload_preset", `${REACT_APP_CL_UPLOAD_PRESET}`)
-            formData.append("api_key", `${REACT_APP_CL_API_KEY}`)
-            formData.append("timestamp", (Date.now() / 1000 | 0))
-
-            let picRes = await axios.post(`${REACT_APP_CL_URL}`, formData)
-
-            this.setState({
-                pic: picRes.data.secure_url
-            })
+        catch(err) {
+            alert("Error uploading picture")
         }
     }
 
@@ -90,7 +98,7 @@ class AddProductModal extends Component {
                 return
             }
             else {
-                let number = parseFloat(Number(this.state.price).toFixed(2))
+                let number = Math.round(Number(this.state.price) * 1e2) / 1e2
                 let payload = {
                     catagoryType: this.state.catagoryType,
                     name: this.state.name,
@@ -99,7 +107,7 @@ class AddProductModal extends Component {
                     pic: this.state.pic,
                     price: number
                 }
-                await axios.post("/api/a/add/product", payload)
+                let productRes = await axios.post("/api/a/add/product", payload)
     
                 this.setState({
                     catagoryType: 1,
@@ -107,18 +115,24 @@ class AddProductModal extends Component {
                     description: "",
                     color: "",
                     pic: "",
-                    price: ""
+                    price: "",
+                    productId: productRes.data[0].id
                 })
 
                 this.descRef.current.value=""
     
-                this.props.toggleShow()
-                alert("Added product")
+                this.props.history.push(`/a/edit/product/${productRes.data[0].id}`)
             }
         }
         catch(err) {
             alert("Error adding product please try again later")
         }
+    }
+
+    toggleShow = () => {
+        this.setState({
+            show: !this.state.show
+        })
     }
 
     render() {
@@ -199,4 +213,4 @@ class AddProductModal extends Component {
     }
 }
 
-export default AddProductModal
+export default withRouter(AddProductModal)

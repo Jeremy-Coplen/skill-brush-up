@@ -1,0 +1,77 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.edit_single_product {
+    @include flex(column);
+}
+
+.admin_nav {
+    @include flex($justify: flex-end);
+    width: 100vw;
+    padding: 10px;
+    border-bottom: 1px solid $black;
+    margin-bottom: 20px;
+    :nth-child(1) {
+        margin-right: 10px;
+    }
+}
+
+.edit_single_product_container {
+    @include flex($justify: space-around);
+    width: 100vw;
+}
+
+.edit_img_container {
+    @include flex(column);
+}
+
+.edit_product_img {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.edit_product_info_container {
+    @include flex();
+    border-bottom: 1px solid $black;
+    margin-bottom: 20px;
+    padding: 5px;
+    :nth-child(1){
+        margin-right: 20px;
+    }
+    div{
+        @include flex();
+    }
+}
+
+.edit_description_container {
+    @include flex($align: flex-start);
+    margin-bottom: 20px;
+    :nth-child(1) {
+        margin-right: 20px;
+    }
+    div {
+        :nth-child(1) {
+            margin-right: 20px;
+        }
+    }
+}
+
+.edit_description_p {
+    height: 10vh;
+    width: 10vw;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+.border_bottom {
+    border-bottom: 1px solid $black;
+}
+
+.padding {
+    padding: 5px;
+}
+
+.edit_price_info {
+    border: none;
+}

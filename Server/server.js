@@ -49,7 +49,16 @@ app.post("/api/a/add/catagory", admin.addCatagory)
 // Admin Get Endpoints
 app.get("/api/a/check-admin-cred", admin.checkAdminCred)
 app.get("/api/a/logout", admin.logout)
+app.get("/api/a/get/product/:productid", admin.getProduct)
 app.get("/api/a/get/catagories", admin.getCatagories)
+
+// Admin Put Endpoints
+app.put("/api/a/update/product/catagory", admin.updateProductCatagory)
+app.put("/api/a/update/product/name", admin.updateProductName)
+app.put("/api/a/update/product/description", admin.updateProductDescription)
+app.put("/api/a/update/product/color", admin.updateProductColor)
+app.put("/api/a/update/product/picture", admin.updateProductPicture)
+app.put("/api/a/update/product/price", admin.updateProductPrice)
 
 massive(CONNECTION_STRING).then(db => {
     app.set("db", db)

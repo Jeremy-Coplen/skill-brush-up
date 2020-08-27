@@ -73,6 +73,21 @@ module.exports = {
         }
     },
 
+    getProduct: async (req, res) => {
+        try{
+            const db = req.app.get("db")
+            const id = Number(req.params.productid)
+
+            let productRes = await db.get_product([id])
+
+            res.status(200).send(productRes)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
     getCatagories: async (req, res) => {
         try{
             const db = req.app.get("db")
@@ -99,7 +114,7 @@ module.exports = {
                 price
             } = req.body
 
-            let productRes = db.add_product([catagoryType, name, description, color, pic, price])
+            let productRes = await db.add_product([catagoryType, name, description, color, pic, price])
             res.status(200).send(productRes)
         }
         catch(err) {
@@ -114,6 +129,113 @@ module.exports = {
             const { name } = req.body
 
             await db.add_catagory([name])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateProductCatagory: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const {
+                catagory,
+                id
+            } = req.body
+
+            await db.update_product_catagory([catagory, id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateProductName: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const {
+                name,
+                id
+            } = req.body
+
+            await db.update_product_name([name, id])
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateProductDescription: async (req, res) => {
+        try{
+            const db = req.app.get("db")
+            const {
+                description,
+                id
+            } = req.body
+
+            await db.update_product_description([description, id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateProductColor: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const {
+                color,
+                id
+            } = req.body
+
+            await db.update_product_color([color, id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateProductPicture: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const {
+                picture,
+                id
+            } = req.body
+
+            await db.update_product_picture([picture, id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateProductPrice: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const {
+                price,
+                id
+            } = req.body
+
+            await db.update_product_price([price, id])
 
             res.sendStatus(200)
         }
