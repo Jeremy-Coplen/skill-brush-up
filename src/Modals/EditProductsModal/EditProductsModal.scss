@@ -1,2 +1,9 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
+
+.edit_product_list {
+    @include flex(column, flex-start);
+    height: 90%;
+    width: 90%;
+    overflow: auto;
+}

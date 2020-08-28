@@ -1,0 +1,14 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.admin_edit_catagory {
+    @include flex(row);
+    margin-bottom: 20px;
+    margin-right: 20px;
+    div {
+        @include flex(row);
+    }
+    p {
+        margin-right: 10px;
+    }
+}

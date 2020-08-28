@@ -1,0 +1,47 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.admin_edit_product {
+    @include flex(row, flex-start);
+    margin-bottom: 20px;
+    min-height: 15vh;
+    width: 100%;
+    div {
+        @include flex(row, flex-start);
+        overflow: auto;
+        width: 90%;
+        margin-right: 10px;
+        div {
+            @include flex(row, flex-start);
+            min-width: 10vw;
+            margin-right: 10px;
+            img {
+                height: 100px;
+                width: 100px;
+            }
+        }
+    }
+}
+
+.info_name {
+    margin-right: 10px;
+}
+
+.admin_edit_product_picture {
+    min-width: 12vw !important;
+}
+
+.admin_edit_product_name {
+    min-width: 12vw !important;
+}
+
+.admin_edit_product_description {
+    min-width: 17vw !important;
+    :nth-child(2) {
+        overflow: auto;
+    }
+}
+
+.admin_edit_product_color {
+    min-width: 7vw !important;
+}

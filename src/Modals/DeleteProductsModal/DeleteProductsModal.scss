@@ -1,2 +1,9 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
+
+.admin_delete_products_container {
+    @include flex(column, flex-start);
+    overflow: auto;
+    height: 90%;
+    width: 90%;
+}

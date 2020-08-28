@@ -59,6 +59,14 @@ app.put("/api/a/update/product/description", admin.updateProductDescription)
 app.put("/api/a/update/product/color", admin.updateProductColor)
 app.put("/api/a/update/product/picture", admin.updateProductPicture)
 app.put("/api/a/update/product/price", admin.updateProductPrice)
+app.put("/api/a/update/catagory", admin.updateCatagory)
+
+// Admin Delete Endpoints
+app.delete("/api/a/delete/product/:productid", admin.deleteProduct)
+app.delete("/api/a/delete/catagory/:catagoryid", admin.deleteCatagory)
+
+// User Get Endpoints
+app.get("/api/u/get/products", user.getProducts)
 
 massive(CONNECTION_STRING).then(db => {
     app.set("db", db)

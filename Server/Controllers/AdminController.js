@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs")
-const { response } = require("express")
 
 module.exports = {
     login: async (req, res) => {
@@ -236,6 +235,54 @@ module.exports = {
             } = req.body
 
             await db.update_product_price([price, id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    updateCatagory: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const {
+                name,
+                id
+            } = req.body
+
+            await db.update_catagory([name, id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    deleteProduct: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const id = Number(req.params.productid)
+
+            await db.delete_product([id])
+
+            res.sendStatus(200)
+        }
+        catch(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+    },
+
+    deleteCatagory: async (req, res) => {
+        try {
+            const db = req.app.get("db")
+            const id = Number(req.params.catagoryid)
+
+            await db.delete_catagory([id])
 
             res.sendStatus(200)
         }

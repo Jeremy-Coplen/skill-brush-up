@@ -1,2 +1,9 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
+
+.delete_catagories_container {
+    div {
+        @include flex(column);
+        overflow: auto;
+    }
+}

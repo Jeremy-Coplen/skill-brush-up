@@ -1,2 +1,12 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
+
+.admin_edit_catagories {
+    height: 90%;
+    width: 90%;
+}
+
+.admin_edit_catagories_info {
+    @include flex(column);
+    overflow: auto;
+}

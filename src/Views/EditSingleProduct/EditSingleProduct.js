@@ -22,6 +22,7 @@ class EditSingleProduct extends Component {
             editingPicture: false,
             editingPrice: false,
             catagoryType: 1,
+            catagoryName: "",
             name: "",
             description: "",
             color: "",
@@ -38,10 +39,13 @@ class EditSingleProduct extends Component {
             let productRes = await axios.get(`/api/a/get/product/${this.props.match.params.productid}`)
             let catagoryRes = await axios.get("/api/a/get/catagories")
 
+            let catagory = catagoryRes.data.find(e => e.id === productRes.data[0].catagory).name
+
             this.setState({
                 product: productRes.data[0],
                 catagories: catagoryRes.data,
                 catagoryType: productRes.data[0].catagory,
+                catagoryName: catagory,
                 name: productRes.data[0].name,
                 description: productRes.data[0].description,
                 color: productRes.data[0].color,
@@ -60,10 +64,12 @@ class EditSingleProduct extends Component {
     updateCatagory = async (e) => {
         try{
             let catagory = Number(e.target.value)
+            let catagoryName = this.state.catagories.find(e => e.id === catagory).name
             let id = this.state.product.id
 
             this.setState({
                 catagoryType: catagory,
+                catagoryName: catagoryName,
                 editingCatagory: false
             })
 
@@ -254,13 +260,6 @@ class EditSingleProduct extends Component {
             <option key={i} value={type.id}>{type.name}</option>
             )
         })
-        let catagory
-        if(this.state.catagories.length > 1) {
-            catagory = this.state.catagories.find(e => e.id === this.state.product.catagory)
-        }
-        else {
-            catagory = { name: "" }
-        }
         const dropzoneStyle = {
             height : "80px",
             width : "100px",
@@ -309,7 +308,7 @@ class EditSingleProduct extends Component {
                                     </div>
                                 :
                                     <div>
-                                        <p>{catagory.name}</p>
+                                        <p>{this.state.catagoryName}</p>
                                         <button name="editingCatagory"
                                         onClick={this.updateEditing} >Edit</button>
                                     </div>

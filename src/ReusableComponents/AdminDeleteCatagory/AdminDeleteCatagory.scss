@@ -1,0 +1,10 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.admin_delete_catagory {
+    flex-direction: row !important;
+    margin-bottom: 20px;
+    p {
+        margin-right: 10px;
+    }
+}
