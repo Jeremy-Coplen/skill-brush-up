@@ -1,12 +1,6 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
 
-.one_item_nav {
-    @include flex(row, flex-end);
-    padding: 10px;
-    border-bottom: 1px solid $black;
-}
-
 .login_field_container {
     @include flex(column);
     height: 50vw;

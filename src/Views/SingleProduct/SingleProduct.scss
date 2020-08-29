@@ -1,0 +1,65 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.single_product {
+    height: 100vh;
+    width: 100vw;
+}
+
+.single_product_container {
+    @include flex(column, flex-start);
+    height: 60%;
+    width: 100%;
+}
+
+.single_product_info_container {
+    @include flex(row, space-around, flex-start);
+    @include border();
+    width: 95%;
+    padding: 20px;
+    margin-bottom: 20px;
+    img {
+        height: 500px;
+        width: 500px;
+    }
+}
+
+.single_product_name_info {
+    @include flex(column, flex-start);
+    padding: 20px;
+    height: 100%;
+    width: 50%;
+}
+
+.single_product_name_container {
+    margin-bottom: 30px;
+    p {
+        font-size: 50px;
+        font-weight: bolder;
+    }
+}
+
+.single_product_description {
+    margin-bottom: 30px;
+}
+
+.single_product_info {
+    @include flex(column, space-between);
+    height: 80%;
+    div {
+        @include flex(row, flex-start);
+        width: 100%;
+        :nth-child(1) {
+            margin-right: 10px;
+        }
+    }
+}
+
+#cart_container_single {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    transition: width 0.5s;
+}

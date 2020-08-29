@@ -6,6 +6,7 @@ import About from "./Views/About/About"
 import AdminLogin from "./Views/AdminLogin/AdminLogin"
 import AdminMain from "./Views/AdminMain/AdminMain"
 import EditSingleProduct from "./Views/EditSingleProduct/EditSingleProduct"
+import SingleProduct from "./Views/SingleProduct/SingleProduct"
 
 export default <Switch>
     <Route exact path="/" component={Home} />
@@ -13,5 +14,6 @@ export default <Switch>
     <Route path="/a/login" component={AdminLogin} />
     <Route path="/a/main" component={AdminMain} />
     <Route path="/a/edit/product/:productid" component={EditSingleProduct} />
+    <Route path="/p/:productid" component={SingleProduct} />
     <Route render={() => <Redirect to={{pathname: "/"}} />} />
 </Switch>

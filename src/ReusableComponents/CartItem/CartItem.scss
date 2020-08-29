@@ -1,0 +1,19 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.cart_item {
+    @include flex(column);
+    @include border();
+    padding: 10px;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.cart_item_info {
+    @include flex(row, flex-start);
+    width: 85%;
+    img {
+        height: 100px;
+        width: 100px;
+    }
+}

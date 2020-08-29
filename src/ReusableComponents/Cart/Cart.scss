@@ -1,0 +1,24 @@
+@import "../../Styles/mixins.scss";
+@import "../../Styles/variables.scss";
+
+.cart_display_none {
+    display: none;
+}
+
+.cart {
+    @include flex(column, flex-start);
+    @include shadow();
+    border-left: 1px solid $black;
+    border-top: 1px solid $black;
+    height: 100vw;
+    width: 100%;
+    background-color: $white;
+    padding: 30px;
+    overflow: auto;
+}
+
+.cart_x {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

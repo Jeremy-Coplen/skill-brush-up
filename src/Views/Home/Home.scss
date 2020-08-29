@@ -2,12 +2,77 @@
 @import "../../Styles/variables.scss";
 
 .home {
-    @include flex(column);
+    @include flex(column, flex-start);
+    height: 100vh;
+    width: 100vw;
 }
 
-.sort_navbar {
-    @include flex(row, space-around);
+.one_item_nav {
+    @include flex(row, flex-end);
     width: 100vw;
+    padding: 10px;
+    border-bottom: 1px solid $black;
+    margin-bottom: 30px;
+}
+
+.home_content_container {
+    @include flex(column, flex-start);
+    @include border();
+    height: 70%;
+    width: 90%;
+    margin-bottom: 10px;
+    padding-top: 20px;
+}
+
+.sort_selection_container {
+    @include flex(row, flex-start);
+    width: 100%;
     border-bottom: 1px solid $black;
     padding: 10px;
+    margin-bottom: 50px;
+}
+
+.select_container {
+    @include flex();
+    p {
+        margin-right: 10px;
+    }
+}
+
+.home_products_container {
+    @include flex(row, center, flex-start);
+    flex-wrap: wrap;
+    height: 80%;
+    width: 90%;
+    overflow: auto;
+}
+
+.cart_icon {
+    @include flex(row);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $white;
+    background-color: $darkBlue;
+    img {
+        height: 30px;
+        width: 30px;
+        margin-right: 10px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.cart_icon_none {
+    display: none;
+}
+
+#cart_container {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0px;
+    transition: width 0.5s;
 }

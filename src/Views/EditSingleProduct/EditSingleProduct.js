@@ -225,7 +225,6 @@ class EditSingleProduct extends Component {
             }
             else {
                 let price = Math.round(Number(this.state.price) * 1e2) / 1e2
-                console.log(typeof(price))
                 let id = this.state.product.id
                 
                 this.setState({

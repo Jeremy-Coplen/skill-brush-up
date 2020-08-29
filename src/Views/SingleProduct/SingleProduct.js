@@ -1,71 +1,49 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
 import axios from "axios"
-import { connect } from "react-redux"
+import { Link, withRouter } from "react-router-dom"
 
+import { connect } from "react-redux"
 import { updateUserCart, updateUserSubtotal, updateUserTotal } from "../../Ducks/reducer"
-import ProductCard from "../../ReusableComponents/ProductCard/ProductCard"
+import Cart from "../../ReusableComponents/Cart/Cart"
 import SiteBanner from "../../ReusableComponents/SiteBanner/SiteBanner"
 import SiteFooter from "../../ReusableComponents/SiteFooter/SiteFooter"
-import Cart from "../../ReusableComponents/Cart/Cart"
 import cartIcon from "../../Images/cart.png"
-import "./Home.scss"
+import "./SingleProduct.scss"
 
-class Home extends Component {
-    constructor() {
-        super()
+class SingleProduct extends Component {
+    constructor(props) {
+        super(props)
 
         this.state = {
-            products: [],
-            sortedProducts: [],
-            catagories: [],
-            catagory: 0,
+            product: {},
+            cart: [],
             cartShow: false,
         }
     }
 
     async componentDidMount() {
         try {
-            let productRes = await axios.get("/api/u/get/products")
-            let catagoriesRes = await axios.get("/api/a/get/catagories")
+            let productRes = await axios.get(`/api/a/get/product/${this.props.match.params.productid}`)
             let cart = this.props.cart
 
             this.setState({
-                products: productRes.data,
-                sortedProducts: productRes.data,
-                catagories: catagoriesRes.data,
+                product: productRes.data[0],
                 cart
             })
         }
         catch(err) {
-            console.log(err)
-            alert("Error grabbing product information please try again later")
+            alert("Error getting Product info please try again later")
+            this.props.history.push("/")
         }
-    }
-
-    updateCatagory = (e) => {
-        let sortedProducts = []
-        let i;
-
-        for(i = 0; i < this.state.products.length; i++) {
-            if(this.state.products[i].catagory === e.target.value) {
-                sortedProducts.push(this.state.products[i])
-            }
-        }
-
-        this.setState({
-            [e.target.name]: e.target.value,
-            sortedProducts: sortedProducts
-        })
     }
 
     showCart = () => {
-        if(document.getElementById("cart_container")) {
+        if(document.getElementById("cart_container_single")) {
             this.setState({
                 cartShow: true
             })
     
-            document.getElementById("cart_container").style.width = "30vw"
+            document.getElementById("cart_container_single").style.width = "30vw"
         }
         else {
             return
@@ -73,12 +51,12 @@ class Home extends Component {
     }
 
     hideCart = () => {      
-        if(document.getElementById("cart_container")) {
+        if(document.getElementById("cart_container_single")) {
             this.setState({
                 cartShow: false
             })
             
-            document.getElementById("cart_container").style.width = "0"
+            document.getElementById("cart_container_single").style.width = "0"
         }
         else {
             return
@@ -128,49 +106,48 @@ class Home extends Component {
 
     render() {
         const className = this.state.cartShow ? "cart_icon_none" : "cart_icon"
-        let catagories = this.state.catagories.map((type, i) => {
-            return (
-            <option key={i} value={type.id}>{type.name}</option>
-            )
-        })
-        let sortedProducts = this.state.sortedProducts.map((product, i) => {
-            return (
-                <ProductCard key={i} product={product} />
-            )
-        })
         return (
-            <div className="home">
+            <div className="single_product">
                 <SiteBanner />
                 <div className="one_item_nav">
-                    <Link to="/about"><button>About</button></Link>
+                    <Link to="/"><button>Home</button></Link>
                 </div>
-                <div className="home_content_container">
-                     <div className="sort_selection_container">
-                         <div className="select_container">
-                             <p>Catagory:</p>
-                            <select name="catagory"
-                            onChange={this.updateCatagory} >
-                                <option value={0}>All</option>
-                                {catagories}
-                            </select>
-                         </div>
+                <div className="single_product_container">
+                    <div className="single_product_info_container">
+                        <img src={this.state.product.picture} alt="product"/>
+                        <div className="single_product_name_info">
+                            <div className="single_product_name_container">
+                                <p>{this.state.product.name}</p>
+                            </div>
+                            <div className="single_product_info">
+                                <div className="single_product_description">
+                                    <p>{this.state.product.description}</p>
+                                </div>
+                                <div>
+                                    <p>Color:</p>
+                                    <p>{this.state.product.color}</p>
+                                </div>
+                                <div>
+                                    <p>Price:</p>
+                                    <p>${this.state.product.price}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="home_products_container">
-                        {sortedProducts}
-                    </div>
+                    <button onClick={this.addToCart}>Add To Cart</button>
                 </div>
+                <SiteFooter />
                 <div className={className}>
                     <img src={cartIcon} onClick={this.showCart} alt="cart"/>
                     <p>${this.props.total}</p>
                 </div>
-                <div id="cart_container">
+                <div id="cart_container_single">
                     <Cart show={this.state.cartShow}
                     hideCart={this.hideCart}
                     cart={this.props.cart}
                     addToCart={this.addToCart}
                     calculateTotal={this.calculateTotal} />
                 </div>
-                <SiteFooter />
             </div>
         )
     }
@@ -192,4 +169,4 @@ const actionOutputs = {
 
 const connected = connect(mapStateToProps, actionOutputs)
 
-export default connected(Home)
+export default withRouter(connected(SingleProduct))
