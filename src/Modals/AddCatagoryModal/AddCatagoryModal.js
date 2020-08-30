@@ -23,10 +23,14 @@ class AddCatagoryModal extends Component {
             await axios.post("/api/a/add/catagory", {name: this.state.name})
 
             this.props.toggleShow()
+
             this.setState({
                 name: ""
             })
-            alert("Catagory Added")
+
+            await alert("Catagory Added")
+
+            window.location.reload()
         }
         catch(err) {
             alert("Server Error Please Try Again Later")

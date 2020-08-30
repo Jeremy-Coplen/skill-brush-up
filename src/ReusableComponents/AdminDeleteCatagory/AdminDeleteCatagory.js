@@ -19,7 +19,9 @@ class AdminDeleteCatagory extends Component {
 
             this.props.getCatagoriesAgain()
 
-            alert("Catagory deleted successfully")
+            await alert("Catagory deleted successfully")
+
+            window.location.reload()
         }
         catch(err) {
             alert("Error deleting catagory try again later")

@@ -45,17 +45,21 @@ class Home extends Component {
 
     updateCatagory = (e) => {
         let sortedProducts = []
-        let i;
 
-        for(i = 0; i < this.state.products.length; i++) {
-            if(this.state.products[i].catagory === e.target.value) {
-                sortedProducts.push(this.state.products[i])
+        if(Number(e.target.value) === 0) {
+            sortedProducts = this.state.products
+        }
+        else {
+            for(let i = 0; i < this.state.products.length; i++) {
+                if(this.state.products[i].catagory === Number(e.target.value)) {
+                    sortedProducts.push(this.state.products[i])
+                }
             }
         }
 
         this.setState({
             [e.target.name]: e.target.value,
-            sortedProducts: sortedProducts
+            sortedProducts
         })
     }
 

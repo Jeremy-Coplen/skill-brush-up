@@ -65,8 +65,23 @@ class Cart extends Component {
         await this.props.updateUserTotal(total)
     }
 
+    purchase = async () => {
+        let cart = []
+        let subtotal = 0.00
+        let total = 0.00
+
+        this.props.updateUserCart(cart)
+        this.props.updateUserSubtotal(subtotal)
+        this.props.updateUserTotal(total)
+
+        this.props.hideCart()
+
+        alert("Thank you for your purchase!")
+    }
+
     render() {
-        const className = this.props.show ? "cart" : "cart_display_none"
+        const className = this.props.show ? "cart_x" : "cart_x_none"
+        const purchaseClassName = this.props.cart.length ? "purchase_btn" : "purchase_none"
         const cartItems = this.props.cart.map((item, i) => {
             return (
                 <CartItem key={i} 
@@ -76,10 +91,12 @@ class Cart extends Component {
             )
         })
         return (
-            <div className={className}>
+            <div className="cart">
                 {cartItems}
-                <button className="cart_x" 
+                <button className={className} 
                 onClick={this.props.hideCart}>X</button>
+                <button className={purchaseClassName}
+                onClick={this.purchase} >Purchase</button>
             </div>
         )
     }

@@ -97,6 +97,11 @@ class SingleProduct extends Component {
             }
 
             await this.props.updateUserCart(cart)
+
+            if(this.state.cartShow === false) {
+                this.showCart()
+            }
+
             this.calculateTotal()
         }
         catch(err) {

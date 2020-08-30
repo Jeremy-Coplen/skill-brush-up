@@ -1,10 +1,6 @@
 @import "../../Styles/mixins.scss";
 @import "../../Styles/variables.scss";
 
-.cart_display_none {
-    display: none;
-}
-
 .cart {
     @include flex(column, flex-start);
     @include shadow();
@@ -17,8 +13,20 @@
     overflow: auto;
 }
 
+.cart_x_none {
+    display: none;
+}
+
 .cart_x {
     position: absolute;
     top: 5px;
     right: 5px;
+}
+
+.purchase_none {
+    display: none;
+}
+
+.purchase_btn {
+    display: inline-block;
 }
